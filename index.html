@@ -22,23 +22,30 @@
     <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="">Website</a>
+            <a class="navbar-brand" href="">Magic: The Gathering Encyclopedia</a>
             
         
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="page1.html">Page1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="page2.html">Page2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="page3.html">Page3</a>
-                    </li>
-                </ul>
-            </div>
+
         </nav>
+        
+    <div class="top-banner">
+    <form class="header">
+      <label>Enter Query:</label>
+      <input id="magicInput" type="text"></input>
+      <input class="findCard" id="findCard" type="submit" value="Find Card"></input>
+      <input class="displayPhoto" id="displayPhoto" type="submit" value="Display Photo"></input>
+      <input class="sortType" id="sortType" type="submit" value="Sort By Type"></input>
+
+
+    </form>
+    </div>
+    
+  <div id="magicResults">
+  </div>
+        
+        <script src="script.js"></script>
+
+        <!-- Name, Type, Flavor, Text, Image -->
 
         <!--Footer with Github URL-->
         <footer class="page-footer fixed-bottom">
