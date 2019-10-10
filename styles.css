@@ -1,0 +1,44 @@
+.searchbar {
+    text-align: center;
+    font-family: Merriweather, serif;
+    padding: 5px;
+    font-size: medium;
+    background: rgba(222, 222, 222, 0.6);
+}
+
+@media only screen and (min-width: 700px) {
+    .total {
+        background-image: url("./magic.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .total {
+        background-image: url("./cardback.jpg");
+        background-size: 50%;
+        background-attachment: scroll;
+    }
+}
+
+.cardinfo {
+    text-align: center;
+    font-family: Merriweather, serif;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.details {
+    display: inline-block;
+    background-color: rgba(222,222,222,0.6);
+    overflow: auto;
+    padding: 5px;
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0px;
+}

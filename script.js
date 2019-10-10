@@ -25,9 +25,10 @@ const url = "https://api.magicthegathering.io/v1/cards?name=" + value;
         }
         else
         {
-            stats += "<p>Name: " + json.cards[0].name + "</br>";
+            stats += "<p class = \"details\">Name: " + json.cards[0].name + "</br>";
             stats += "Rarity: " + json.cards[0].rarity + "</br>";
             stats += "Description: " + json.cards[0].text + "</br>";
+            stats += "Set: " + json.cards[0].setName + "</br>";
             if (json.cards[0].flavor != null) {
                 stats += json.cards[0].flavor + "</br>";
             }
@@ -76,7 +77,7 @@ console.log(url);
     });
 });
 
-document.getElementById("sortType").addEventListener("click", function(event) {
+document.getElementById("magicInput").addEventListener("click", function(event) {
   event.preventDefault();
   
   document.getElementById("magicResults").innerHTML = "";
@@ -86,7 +87,7 @@ document.getElementById("sortType").addEventListener("click", function(event) {
     return;
   console.log(value);
 
-const url = "https://api.magicthegathering.io/v1/cards?type=" + value;
+const url = "https://api.magicthegathering.io/v1/cards?set=" + value;
   fetch(url)
   .then(function(response) {
       return response.json();
@@ -106,6 +107,7 @@ const url = "https://api.magicthegathering.io/v1/cards?type=" + value;
             list += "<p>Name: " + json.cards[i].name + "</br>";
             list += "Rarity: " + json.cards[i].rarity + "</br>";
             list += "Description: " + json.cards[i].text + "</br>";
+            list += "Set: " + json.cards[0].setName + "</br>";
             if (json.cards[i].flavor != null) {
                 list += json.cards[i].flavor + "</br>";
             }
