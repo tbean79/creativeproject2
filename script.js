@@ -3,24 +3,50 @@
 document.getElementById("findCard").addEventListener("click", function(event) {
   event.preventDefault();
   
-
+  document.getElementById("magicResults").innerHTML = "";
+  
+  let stats = "";
   
   const value = document.getElementById("magicInput").value;
+  
   if (value === "")
-    return;
-  //console.log(value);
-
-const url = "https://api.magicthegathering.io/v1/cards?name=" + value;
+  {
+    var randomNum = Math.random() * 4000;
+    randomNum = Math.ceil(randomNum);
+    const url = "https://api.magicthegathering.io/v1/cards/" + randomNum;
   fetch(url)
   .then(function(response) {
       return response.json();
     }).then(function(json) {
-        //console.log(json);
-        let stats = "";
+
+            stats += "<p class = \"details\">Name: " + json.card.name + "</br>";
+            stats += "Rarity: " + json.card.rarity + "</br>";
+            stats += "Description: " + json.card.text + "</br>";
+            stats += "Set: " + json.card.setName + "</br>";
+            if (json.card.flavor != null) {
+                stats += json.card.flavor + "</br>";
+            }
+            document.getElementById("magicResults").innerHTML = stats;
+
+        
+    }); 
+    
+  }
+  
+  
+  else
+  {
+
+const url = "https://api.magicthegathering.io/v1/cards?name=\"" + value + "\"";
+  fetch(url)
+  .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+
         
         if (json.cards.length === 0)
         {
-            stats = "Not Found";
+            stats = "<p class = \"details\">Not Found</p>";
             document.getElementById("magicResults").innerHTML = stats;
         }
         else
@@ -32,12 +58,12 @@ const url = "https://api.magicthegathering.io/v1/cards?name=" + value;
             if (json.cards[0].flavor != null) {
                 stats += json.cards[0].flavor + "</br>";
             }
-        
-        //console.log(stats);
-        document.getElementById("magicResults").innerHTML = stats;
-        
+            document.getElementById("magicResults").innerHTML = stats;
+
         }
     }); 
+  }
+    
 });
 
 
@@ -46,23 +72,41 @@ document.getElementById("displayPhoto").addEventListener("click", function(event
   
   document.getElementById("magicResults").innerHTML = "";
   
+  let photo = "";
+  
   const value = document.getElementById("magicInput").value;
   if (value === "")
-    return;
-  console.log(value);
-
-const url = "https://api.magicthegathering.io/v1/cards?name=" + value;
-console.log(url);
+  {
+    var randomNum = Math.random() * 4000;
+    randomNum = Math.ceil(randomNum);
+    console.log(randomNum);
+    const url = "https://api.magicthegathering.io/v1/cards/" + randomNum;
   fetch(url)
   .then(function(response) {
       return response.json();
     }).then(function(json) {
-        console.log(json);
-        let photo = "";
+       
+        
+            photo += "<img src = \"" + json.card.imageUrl + "\"></p>";
+            
+            document.getElementById("magicResults").innerHTML = photo;
+        
+    });
+  }
+  
+  else
+  {
+
+const url = "https://api.magicthegathering.io/v1/cards?name=\"" + value + "\"";
+  fetch(url)
+  .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+
         
         if (json.cards.length === 0)
         {
-            photo = "Not Found";
+            photo = "<p class = \"details\">Not Found</p>";
             document.getElementById("magicResults").innerHTML = photo;
         }
         else
@@ -70,54 +114,70 @@ console.log(url);
             photo += "<img src = \"" + json.cards[0].imageUrl + "\"></p>";
                 
         
-            console.log(photo);
             document.getElementById("magicResults").innerHTML = photo;
         }
     
     });
-});
+  }
+});  
 
-document.getElementById("magicInput").addEventListener("click", function(event) {
+document.getElementById("setSearch").addEventListener("click", function(event) {
   event.preventDefault();
   
   document.getElementById("magicResults").innerHTML = "";
   
+  let list = "";
+  
   const value = document.getElementById("magicInput").value;
   if (value === "")
-    return;
-  console.log(value);
-
-const url = "https://api.magicthegathering.io/v1/cards?set=" + value;
+  {
+    const url = "https://api.magicthegathering.io/v1/sets/";
   fetch(url)
   .then(function(response) {
       return response.json();
     }).then(function(json) {
-        //console.log(json);
-        let list = "";
+
+        var randomNum = Math.random() * 495;
+        randomNum = Math.ceil(randomNum);
+
         
-        if (json.cards.length === 0)
+            list += "<p class = \"details\">Name: " + json.sets[randomNum].name + "</br>";
+            list += "Type: " + json.sets[randomNum].type + "</br>";
+            list += "Release Date: " + json.sets[randomNum].releaseDate + "</br>";
+            list += "</br>";
+            
+        
+        
+            document.getElementById("magicResults").innerHTML = list;
+    });
+  }
+  
+  else 
+  {
+const url = "https://api.magicthegathering.io/v1/sets?name=" + value;
+  fetch(url)
+  .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+
+        
+        if (json.sets.length === 0)
         {
-            list = "Not Found";
+            list = "<p class = \"details\">Not Found</p>";
             document.getElementById("magicResults").innerHTML = list;
         }
         else
         {
         
-        for (let i = 0; i < json.cards.length; i++) {
-            list += "<p>Name: " + json.cards[i].name + "</br>";
-            list += "Rarity: " + json.cards[i].rarity + "</br>";
-            list += "Description: " + json.cards[i].text + "</br>";
-            list += "Set: " + json.cards[0].setName + "</br>";
-            if (json.cards[i].flavor != null) {
-                list += json.cards[i].flavor + "</br>";
-            }
+            list += "<p class = \"details\">Name: " + json.sets[0].name + "</br>";
+            list += "Type: " + json.sets[0].type + "</br>";
+            list += "Release Date: " + json.sets[0].releaseDate + "</br>";
             list += "</br>";
             
-        }
         
-            //console.log(stats);
             document.getElementById("magicResults").innerHTML = list;
         }
     
-    });
-});
+    }); 
+  }
+}); 
